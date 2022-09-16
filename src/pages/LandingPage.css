@@ -1,0 +1,105 @@
+.LandingContainer {
+    border: solid black 3px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   background-color: black;
+}
+
+.Middle {
+    height: 85vh;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.TopHalf {
+    height: 50%;
+    display: flex;  
+    flex-direction: row;
+    background-image: url(https://tetra-cube.com/dnd/dndimages/statblockparch.jpg);
+}
+
+.MonsterInfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.Link {
+    text-decoration: none;
+}
+
+.Border {
+    width: 100%;
+    height: 10px;
+    background-image: url(https://tetra-cube.com/dnd/dndimages/statblockbar.jpg);
+}
+
+.BottomBorder {
+    width: 100%;
+    height: 10px;
+    background-image: url(https://tetra-cube.com/dnd/dndimages/statblockbar.jpg);
+    display: inline-block;
+    align-self: flex-end;
+}
+
+h1 {
+    color: #7A200D;
+}
+
+.DividingLine {
+    color: #7A200D;
+    fill: #7A200D;
+}
+
+.MonsterContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.MonsterImg {
+    max-width: 75%;
+    max-height: 75%;
+    border-radius: 10%;
+}
+
+.BottomHalf {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    background-image: url(https://tetra-cube.com/dnd/dndimages/statblockparch.jpg);
+    margin-top: 2%;
+}
+
+.EncounterContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.EncounterImg {
+    max-width: 75%;
+    max-height: 75%;
+    border-radius: 10%;
+}
+
+.EncounterInfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+}
