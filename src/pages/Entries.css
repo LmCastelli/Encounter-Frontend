@@ -1,0 +1,57 @@
+.EntriesContainer {
+    border: solid black 2px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.ListContainer {
+    width: 50%;
+}
+
+.SelectedContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Info {
+    background-image: url(https://tetra-cube.com/dnd/dndimages/statblockparch.jpg);
+}
+
+.AbilityScores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100;
+}
+
+.StatContainer {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.TextField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+h3 {
+    color:#7A200D;
+    font-weight: 800;
+}
+
+h4 {
+    color: #7A200D;
+    font-weight:800;
+}
+
+p {
+    color: #7A200D;
+    font-weight: 100;
+}

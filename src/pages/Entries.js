@@ -1,24 +1,144 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import "./Entries.css"
 
 function Entries () {
 
+    const dummydata = [
+        {
+            "CHA": 20,
+            "CON": 20,
+            "DEX": 20,
+            "INT": 20,
+            "STR": 20,
+            "WIS": 20,
+            "alignment": "Good",
+            "armor_type": "Chain Mail",
+            "blind_sight": 0,
+            "burrow_speed": 20,
+            "challenge_rating": 10,
+            "climb_speed": 20,
+            "damage_immune": "Poison",
+            "damage_resistant": "All",
+            "damage_vulnerable": "",
+            "dark_vision": 60,
+            "dnd_id": 1,
+            "expert_skills": "Stealth",
+            "fly_speed": 40,
+            "hit_points": 90,
+            "immunities": "Blinded, Charmed, Invisible",
+            "languages_spoken": "All",
+            "languages_understood": "All",
+            "name": "Lucas",
+            "nat_armor_bonus": 10,
+            "proficient_skills": "History",
+            "saving_throws": "Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma",
+            "size": "Medium",
+            "speed": 20,
+            "swim_speed": 20,
+            "telepathy": 60,
+            "tremor_sense": 0,
+            "true_sight": 30,
+            "type": "Humanoid"
+        },
+        {
+            "CHA": 20,
+            "CON": 20,
+            "DEX": 20,
+            "INT": 20,
+            "STR": 20,
+            "WIS": 20,
+            "alignment": "neutral",
+            "armor_type": "Light Armor",
+            "blind_sight": 0,
+            "burrow_speed": 0,
+            "challenge_rating": 200,
+            "climb_speed": 0,
+            "damage_immune": "none",
+            "damage_resistant": "none",
+            "damage_vulnerable": "none",
+            "dark_vision": 0,
+            "dnd_id": 2,
+            "expert_skills": "none",
+            "fly_speed": 0,
+            "hit_points": 600,
+            "immunities": "none",
+            "languages_spoken": "none",
+            "languages_understood": "none",
+            "name": "test",
+            "nat_armor_bonus": 0,
+            "proficient_skills": "none",
+            "saving_throws": "none",
+            "size": "medium",
+            "speed": 100,
+            "swim_speed": 0,
+            "telepathy": 0,
+            "tremor_sense": 0,
+            "true_sight": 0,
+            "type": ""
+        }
+    ]
 
-    useEffect(() => {
-        getEntries();
-    }, []);
+    const [selected, setSelected] = useState({
+        "CHA": 20,
+        "CON": 20,
+        "DEX": 20,
+        "INT": 20,
+        "STR": 20,
+        "WIS": 20,
+        "alignment": "Good",
+        "armor_type": "Chain Mail",
+        "blind_sight": 0,
+        "burrow_speed": 20,
+        "challenge_rating": 10,
+        "climb_speed": 20,
+        "damage_immune": "Poison",
+        "damage_resistant": "All",
+        "damage_vulnerable": "",
+        "dark_vision": 60,
+        "dnd_id": 1,
+        "expert_skills": "Stealth",
+        "fly_speed": 40,
+        "hit_points": 90,
+        "immunities": "Blinded, Charmed, Invisible",
+        "languages_spoken": "All",
+        "languages_understood": "All",
+        "name": "Lucas",
+        "nat_armor_bonus": 10,
+        "proficient_skills": "History",
+        "saving_throws": "Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma",
+        "size": "Medium",
+        "speed": 20,
+        "swim_speed": 20,
+        "telepathy": 60,
+        "tremor_sense": 0,
+        "true_sight": 30,
+        "type": "Humanoid"
+    })
+
+    const abilityModifier = (score) => {
+        let mod = Math.floor((score-10) / 2);
+        if(mod > 0) {
+            return `+${mod}`
+        } else {
+            return `${mod}`
+        }
+    };
+
 
     const getEntries = () => {
-        axios
-        .get('https://dnd-manager-backend.herokuapp.com/')
+        axios.get('https://dnd-manager-backend.herokuapp.com/')
         .then(res => {
             console.log(res.data)
         })
         .catch(err => {
-            console.error(err)
+            console.error(err);
         })
-    };
-
+    }
+    
+    useEffect(() => {
+        getEntries();
+    }, [])
 
 
 
@@ -26,8 +146,213 @@ function Entries () {
 
 
     return (
-        <div>
-            <h1>View Entries</h1>
+        <div className="EntriesContainer">
+            <div className="ListContainer">
+                <h1>View Entries</h1>
+                
+            </div>
+            <div className="SelectedContainer">
+                <div className="Border"></div>
+                <div className="Info">
+                    <h1>{selected.name}</h1>
+                    <p>{selected.size} {selected.type.toLowerCase()}, {selected.alignment}</p>
+                    <svg height="5" width="100%" className="DividingLine">
+                        <polyline points="0,0 400, 2.5 0,5"></polyline>
+                    </svg>
+                    <div className="TextField">
+                        <h4>Hit Points:</h4>
+                        <p>{selected.hit_points}</p>
+                    </div>
+                    <div className="TextField">
+                        <h4>Armor Class:</h4>
+                        <p>{selected.armor_type} ({selected.nat_armor_bonus})</p>
+                    </div>
+                    <div className="TextField">
+                        <h4>Speed: </h4>
+                        <p>{selected.speed} </p>
+                    </div>
+                    <div className="TextField">
+                        <h4>Challenge Rating: </h4>
+                        <p>{selected.challenge_rating}</p>
+                    </div>
+
+                    {selected.burrow_speed > 0 ? 
+                    <div className="TextField">
+                        <h4>Burrow Speed: </h4>
+                        <p>{selected.burrow_speed}</p>
+                    </div>:
+                    null}
+
+                    {selected.climb_speed > 0 ? 
+                    <div className="TextField">
+                        <h4>Climb Speed: </h4>
+                        <p>{selected.climb_speed}</p>
+                    </div>:
+                    
+                    null}
+                    
+                    {selected.fly_speed > 0 ? 
+                    <div className="TextField">
+                        <h4>Fly Speed: </h4>
+                        <p>{selected.fly_speed}</p>
+                    </div>:
+                    null}
+
+                    {selected.swim_speed > 0 ? 
+                    <div className="TextField">
+                        <h4>Swim Speed: </h4>
+                        <p>{selected.swim_speed}</p>
+                    </div>:
+                    null}
+
+                    {selected.saving_throws !== "" ? 
+                    <div className="TextField">
+                        <h4>Saving Throws: </h4>
+                        <p>{selected.saving_throws}</p>
+                    </div>:
+                    null}
+
+                    <svg height="5" width="100%" className="DividingLine">
+                        <polyline points="0,0 400, 2.5 0,5"></polyline>
+                    </svg>
+
+                    <div className="AbilityScores">
+                        <div className="StatContainer">
+                            <h3>STR</h3>
+                            <p>{selected.STR}({abilityModifier(selected.STR)})</p>
+                        </div>
+                        <div className="StatContainer">
+                            <h3>DEX</h3>
+                            <p>{selected.DEX}({abilityModifier(selected.DEX)})</p>
+                        </div>
+                        <div className="StatContainer">
+                            <h3>CON</h3>
+                            <p>{selected.CON}({abilityModifier(selected.CON)})</p>
+                        </div>
+                        <div className="StatContainer">
+                            <h3>INT</h3>
+                            <p>{selected.INT}({abilityModifier(selected.INT)})</p>
+                        </div>
+                        <div className="StatContainer">
+                            <h3>WIS</h3>
+                            <p>{selected.WIS}({abilityModifier(selected.WIS)})</p>
+                        </div>
+                        <div className="StatContainer">
+                            <h3>CHA</h3>
+                            <p>{selected.CHA}({abilityModifier(selected.CHA)})</p>
+                        </div>
+                    </div>
+
+                    <svg height="5" width="100%" className="DividingLine">
+                        <polyline points="0,0 400, 2.5 0,5"></polyline>
+                    </svg>
+
+                    {selected.expert_skills !== "" ?
+                    <div className="TextField">
+                        <h4>Expert Skills: </h4>
+                        <p>{selected.expert_skills}</p>
+                    </div>:
+                    null}
+
+                    {selected.proficient_skills !== "" ?
+                    <div className="TextField">
+                        <h4>Proficient Skills: </h4>
+                        <p>{selected.proficient_skills}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.languages_spoken !== "" ?
+                    <div className="TextField">
+                        <h4>Languages Spoken: </h4>
+                        <p>{selected.languages_spoken}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.languages_understood !== "" ?
+                    <div className="TextField">
+                        <h4>Languages Understood: </h4>
+                        <p>{selected.languages_understood}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.damage_immune !== "" ?
+                    <div className="TextField">
+                        <h4>Damage Immunities: </h4>
+                        <p>{selected.damage_immune}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.damage_resistant !== "" ?
+                    <div className="TextField">
+                        <h4>Damage Resistances: </h4>
+                        <p>{selected.damage_resistant}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.damage_vulnerable !== "" ?
+                    <div className="TextField">
+                        <h4>Damage Vulnerabilities: </h4>
+                        <p>{selected.damage_vulnerable}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.immunities !== "" ?
+                    <div className="TextField">
+                        <h4>Immune to: </h4>
+                        <p>{selected.immunities}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.blind_sight > 0 ? 
+                    <div className="TextField">
+                        <h4>Blind Sight: </h4>
+                        <p>{selected.blind_sight}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.dark_vision > 0 ? 
+                    <div className="TextField">
+                        <h4>Dark Vision: </h4>
+                        <p>{selected.dark_vision}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.true_sight > 0 ? 
+                    <div className="TextField">
+                        <h4>True Sight: </h4>
+                        <p>{selected.true_sight}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.tremor_sense > 0 ? 
+                    <div className="TextField">
+                        <h4>Tremor Sense: </h4>
+                        <p>{selected.tremor_sense}</p>
+                    </div>:
+                    
+                    null}
+
+                    {selected.telepathy > 0 ? 
+                    <div className="TextField">
+                        <h4>Telepathy: </h4>
+                        <p>{selected.telepathy}</p>
+                    </div>:
+                    
+                    null}
+
+                </div>
+                <div className="Border"></div>
+            </div>
         </div>
     )
 }
