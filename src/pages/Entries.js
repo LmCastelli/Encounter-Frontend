@@ -1,5 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import 'antd/dist/antd.css'
+import { NavLink } from "react-router-dom";
+import { Table } from "antd";
+import { useEffect, useState} from "react";
 import "./Entries.css"
 
 function Entries () {
@@ -69,7 +72,7 @@ function Entries () {
             "nat_armor_bonus": 0,
             "proficient_skills": "none",
             "saving_throws": "none",
-            "size": "medium",
+            "size": "Medium",
             "speed": 100,
             "swim_speed": 0,
             "telepathy": 0,
@@ -79,42 +82,7 @@ function Entries () {
         }
     ]
 
-    const [selected, setSelected] = useState({
-        "CHA": 20,
-        "CON": 20,
-        "DEX": 20,
-        "INT": 20,
-        "STR": 20,
-        "WIS": 20,
-        "alignment": "Good",
-        "armor_type": "Chain Mail",
-        "blind_sight": 0,
-        "burrow_speed": 20,
-        "challenge_rating": 10,
-        "climb_speed": 20,
-        "damage_immune": "Poison",
-        "damage_resistant": "All",
-        "damage_vulnerable": "",
-        "dark_vision": 60,
-        "dnd_id": 1,
-        "expert_skills": "Stealth",
-        "fly_speed": 40,
-        "hit_points": 90,
-        "immunities": "Blinded, Charmed, Invisible",
-        "languages_spoken": "All",
-        "languages_understood": "All",
-        "name": "Lucas",
-        "nat_armor_bonus": 10,
-        "proficient_skills": "History",
-        "saving_throws": "Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma",
-        "size": "Medium",
-        "speed": 20,
-        "swim_speed": 20,
-        "telepathy": 60,
-        "tremor_sense": 0,
-        "true_sight": 30,
-        "type": "Humanoid"
-    })
+    const [selected, setSelected] = useState([])
 
     const abilityModifier = (score) => {
         let mod = Math.floor((score-10) / 2);
@@ -129,7 +97,7 @@ function Entries () {
     const getEntries = () => {
         axios.get('https://dnd-manager-backend.herokuapp.com/')
         .then(res => {
-            console.log(res.data)
+            setSelected(res.data[0]);
         })
         .catch(err => {
             console.error(err);
@@ -140,8 +108,31 @@ function Entries () {
         getEntries();
     }, [])
 
+   
 
 
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            defaultSortOrder: 'descend',
+            sorter: (a,b) => a.name.localeCompare(b.name),
+        },
+        {
+            title: 'Id',
+            dataIndex: 'dnd_id',
+            defaultSortOrder: 'descend',
+            sorter: (a,b) => a.dnd_id - b.dnd_id,
+        },
+        {
+            title: 'Challenge Rating',
+            dataIndex: 'challenge_rating',
+            defaultSortOrder: 'descend',
+            sorter: (a,b) => a.challenge_rating - b.challenge_rating,
+        },
+    ];
+
+    
 
 
 
@@ -149,13 +140,20 @@ function Entries () {
         <div className="EntriesContainer">
             <div className="ListContainer">
                 <h1>View Entries</h1>
+                <NavLink to="/" className="Link" >
+                    <h1>Home</h1>
+                </NavLink>
+                <NavLink to="/" className="Link" >
+                    <h1>Encounter</h1>
+                </NavLink>
+                <Table columns={columns} dataSource={dummydata} onRow={(record) => ({onClick: () => {setSelected(record)}})} />
                 
             </div>
             <div className="SelectedContainer">
                 <div className="Border"></div>
                 <div className="Info">
-                    <h1>{selected.name}</h1>
-                    <p>{selected.size} {selected.type.toLowerCase()}, {selected.alignment}</p>
+                    <h1 className="Title">{selected.name}</h1>
+                    <p className="Description">{selected.size} {selected.type.toLowerCase()}, {selected.alignment}</p>
                     <svg height="5" width="100%" className="DividingLine">
                         <polyline points="0,0 400, 2.5 0,5"></polyline>
                     </svg>

@@ -13,10 +13,10 @@ function LandingPage()  {
                     <div className="MonsterInfo">
                         <div className="Border"></div>
                         <NavLink to="/view" className="Link">
-                            <h1>View Monsters</h1>
+                            <h1 className="h1Link">View Monsters</h1>
                         </NavLink>
                         <NavLink to="/add" className="Link">
-                            <h1>Add Monster</h1>
+                            <h1 className="h1Link">Add Monster</h1>
                         </NavLink>
                         <div className="BottomBorder"></div>
                     </div>
@@ -34,8 +34,8 @@ function LandingPage()  {
                     </div>
                     <div className="EncounterInfo">
                         <div className="Border"></div>
-                        <h1>Load Encounter</h1>
-                        <h1>New Encounter</h1>
+                        <h1 className="h1Link">Load Encounter</h1>
+                        <h1 className="h1Link">New Encounter</h1>
                         <div className="BottomBorder"></div>
                     </div>
                 </div>

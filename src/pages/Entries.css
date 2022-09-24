@@ -1,22 +1,36 @@
 .EntriesContainer {
     border: solid black 2px;
-    height: 100vh;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .ListContainer {
     width: 50%;
+    margin: 2%;
 }
 
 .SelectedContainer {
-    width: 50%;
+    width: 30%;
     display: flex;
     flex-direction: column;
 }
 
+.Border {
+    width: 100%;
+    height: 10px;
+    background-image: url(https://tetra-cube.com/dnd/dndimages/statblockbar.jpg);
+}
+
 .Info {
     background-image: url(https://tetra-cube.com/dnd/dndimages/statblockparch.jpg);
+    padding: 2%;
+    font-family: 'Libre Baskerville';
+}
+
+.Description {
+    color: black;
+    font-style: italic;
 }
 
 .AbilityScores {
@@ -41,17 +55,27 @@
 
 }
 
+.Title {
+    margin-top:1%;
+    margin-bottom: 1%;
+}
+
 h3 {
     color:#7A200D;
     font-weight: 800;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 h4 {
     color: #7A200D;
     font-weight:800;
+    margin: 1%;
 }
 
 p {
     color: #7A200D;
     font-weight: 100;
+    margin:0;
+    font-size: .9rem;
 }
