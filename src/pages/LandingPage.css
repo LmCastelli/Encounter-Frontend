@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   background-color: black;
+   
 }
 
 .Middle {
@@ -32,6 +32,7 @@
 
 .Link {
     text-decoration: none;
+    
 }
 
 .Border {

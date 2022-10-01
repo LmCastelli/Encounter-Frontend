@@ -44,45 +44,26 @@ function Entries () {
             "true_sight": 30,
             "type": "Humanoid"
         },
+    ]
+
+    const dummyabilities = [
         {
-            "CHA": 20,
-            "CON": 20,
-            "DEX": 20,
-            "INT": 20,
-            "STR": 20,
-            "WIS": 20,
-            "alignment": "neutral",
-            "armor_type": "Light Armor",
-            "blind_sight": 0,
-            "burrow_speed": 0,
-            "challenge_rating": 200,
-            "climb_speed": 0,
-            "damage_immune": "none",
-            "damage_resistant": "none",
-            "damage_vulnerable": "none",
-            "dark_vision": 0,
-            "dnd_id": 2,
-            "expert_skills": "none",
-            "fly_speed": 0,
-            "hit_points": 600,
-            "immunities": "none",
-            "languages_spoken": "none",
-            "languages_understood": "none",
-            "name": "test",
-            "nat_armor_bonus": 0,
-            "proficient_skills": "none",
-            "saving_throws": "none",
-            "size": "Medium",
-            "speed": 100,
-            "swim_speed": 0,
-            "telepathy": 0,
-            "tremor_sense": 0,
-            "true_sight": 0,
-            "type": ""
+            "ability_id":1,
+            "user_id":1,
+            "ability_name":"Death",
+            "ability_description":"Kill target",
+        },
+        {
+            "ability_id":2,
+            "user_id":1,
+            "ability_name":"Life",
+            "ability_description":"Heal target for all its hit points and replenish all spell slots",
         }
     ]
 
-    const [selected, setSelected] = useState([])
+    const [selected, setSelected] = useState(dummydata[0])
+    const [selectedAbilities, setSelectedAbilities] = useState(dummyabilities)
+    const [data, setData] = useState([])
 
     const abilityModifier = (score) => {
         let mod = Math.floor((score-10) / 2);
@@ -93,23 +74,36 @@ function Entries () {
         }
     };
 
+    const handleClick = (record, id) => {
+        setSelected(record);
+        setSelectedAbilities(id);
+    }
 
     const getEntries = () => {
         axios.get('https://dnd-manager-backend.herokuapp.com/')
         .then(res => {
-            setSelected(res.data[0]);
+            setData(res.data)
+            setSelected(res.data[0])
         })
         .catch(err => {
             console.error(err);
         })
     }
+
+    const getAbilities = (id) => {
+        axios.get(`https://dnd-manager-backend.herokuapp.com/${id}/abilities`)
+        .then(res => {
+            setSelectedAbilities(res.data)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+    }
     
     useEffect(() => {
         getEntries();
+       getAbilities(1);
     }, [])
-
-   
-
 
     const columns = [
         {
@@ -132,22 +126,21 @@ function Entries () {
         },
     ];
 
-    
-
-
 
     return (
         <div className="EntriesContainer">
-            <div className="ListContainer">
-                <h1>View Entries</h1>
-                <NavLink to="/" className="Link" >
-                    <h1>Home</h1>
-                </NavLink>
-                <NavLink to="/" className="Link" >
-                    <h1>Encounter</h1>
-                </NavLink>
-                <Table columns={columns} dataSource={dummydata} onRow={(record) => ({onClick: () => {setSelected(record)}})} />
-                
+            <div className="AllEntriesContainer">
+                <div className="NavBar">
+                    <NavLink to="/" className="Link" >
+                        <h1>Home</h1>
+                    </NavLink>
+                    <NavLink to="/" className="Link" >
+                        <h1>Encounter</h1>
+                    </NavLink>
+                </div>
+                <div className="ListContainer">
+                    <Table columns={columns} dataSource={data} onRow={(record) => ({onClick: () => handleClick(record, record.dnd_id) })} />
+                </div>
             </div>
             <div className="SelectedContainer">
                 <div className="Border"></div>
@@ -178,37 +171,31 @@ function Entries () {
                     <div className="TextField">
                         <h4>Burrow Speed: </h4>
                         <p>{selected.burrow_speed}</p>
-                    </div>:
-                    null}
+                    </div>:null}
 
                     {selected.climb_speed > 0 ? 
                     <div className="TextField">
                         <h4>Climb Speed: </h4>
                         <p>{selected.climb_speed}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
                     
                     {selected.fly_speed > 0 ? 
                     <div className="TextField">
                         <h4>Fly Speed: </h4>
                         <p>{selected.fly_speed}</p>
-                    </div>:
-                    null}
+                    </div>:null}
 
                     {selected.swim_speed > 0 ? 
                     <div className="TextField">
                         <h4>Swim Speed: </h4>
                         <p>{selected.swim_speed}</p>
-                    </div>:
-                    null}
+                    </div>:null}
 
                     {selected.saving_throws !== "" ? 
                     <div className="TextField">
                         <h4>Saving Throws: </h4>
                         <p>{selected.saving_throws}</p>
-                    </div>:
-                    null}
+                    </div>:null}
 
                     <svg height="5" width="100%" className="DividingLine">
                         <polyline points="0,0 400, 2.5 0,5"></polyline>
@@ -249,104 +236,96 @@ function Entries () {
                     <div className="TextField">
                         <h4>Expert Skills: </h4>
                         <p>{selected.expert_skills}</p>
-                    </div>:
-                    null}
+                    </div>:null}
 
                     {selected.proficient_skills !== "" ?
                     <div className="TextField">
                         <h4>Proficient Skills: </h4>
                         <p>{selected.proficient_skills}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.languages_spoken !== "" ?
                     <div className="TextField">
                         <h4>Languages Spoken: </h4>
                         <p>{selected.languages_spoken}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.languages_understood !== "" ?
                     <div className="TextField">
                         <h4>Languages Understood: </h4>
                         <p>{selected.languages_understood}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.damage_immune !== "" ?
                     <div className="TextField">
                         <h4>Damage Immunities: </h4>
                         <p>{selected.damage_immune}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.damage_resistant !== "" ?
                     <div className="TextField">
                         <h4>Damage Resistances: </h4>
                         <p>{selected.damage_resistant}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.damage_vulnerable !== "" ?
                     <div className="TextField">
                         <h4>Damage Vulnerabilities: </h4>
                         <p>{selected.damage_vulnerable}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.immunities !== "" ?
                     <div className="TextField">
                         <h4>Immune to: </h4>
                         <p>{selected.immunities}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.blind_sight > 0 ? 
                     <div className="TextField">
                         <h4>Blind Sight: </h4>
                         <p>{selected.blind_sight}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.dark_vision > 0 ? 
                     <div className="TextField">
                         <h4>Dark Vision: </h4>
                         <p>{selected.dark_vision}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.true_sight > 0 ? 
                     <div className="TextField">
                         <h4>True Sight: </h4>
                         <p>{selected.true_sight}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.tremor_sense > 0 ? 
                     <div className="TextField">
                         <h4>Tremor Sense: </h4>
                         <p>{selected.tremor_sense}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
 
                     {selected.telepathy > 0 ? 
                     <div className="TextField">
                         <h4>Telepathy: </h4>
                         <p>{selected.telepathy}</p>
-                    </div>:
-                    
-                    null}
+                    </div>:null}
+
+                    <svg height="5" width="100%" className="DividingLine">
+                        <polyline points="0,0 400, 2.5 0,5"></polyline>
+                    </svg>
+
+                    <h1>Abilities</h1>
+                    {selectedAbilities !== [] ?
+                    <div className="AbilityField">
+                        {selectedAbilities.map((ability, index) => (
+                            <div className="Abilities">
+                                <h4 key={index}>{ability.ability_name}:</h4>
+                                <p>{ability.ability_description}</p>
+                            </div>
+                            
+                            
+                        ))}
+                    </div>:null}
 
                 </div>
                 <div className="Border"></div>
