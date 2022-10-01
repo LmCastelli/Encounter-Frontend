@@ -82,6 +82,7 @@ function Entries () {
     const getEntries = () => {
         axios.get('https://dnd-manager-backend.herokuapp.com/')
         .then(res => {
+            console.log('fetched ')
             setData(res.data)
             setSelected(res.data[0])
         })
@@ -139,7 +140,7 @@ function Entries () {
                     </NavLink>
                 </div>
                 <div className="ListContainer">
-                    <Table columns={columns} dataSource={data} onRow={(record) => ({onClick: () => handleClick(record, record.dnd_id) })} />
+                    <Table columns={columns} dataSource={data} rowKey={"dnd_id"} onRow={(record) => ({onClick: () => {setSelected(record)}})} />
                 </div>
             </div>
             <div className="SelectedContainer">
@@ -318,8 +319,8 @@ function Entries () {
                     {selectedAbilities !== [] ?
                     <div className="AbilityField">
                         {selectedAbilities.map((ability, index) => (
-                            <div className="Abilities">
-                                <h4 key={index}>{ability.ability_name}:</h4>
+                            <div key={ability.ability_id} className="Abilities">
+                                <h4>{ability.ability_name}:</h4>
                                 <p>{ability.ability_description}</p>
                             </div>
                             
