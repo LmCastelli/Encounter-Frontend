@@ -80,9 +80,9 @@ function Entries () {
     }
 
     const getEntries = () => {
-        axios.get('https://dnd-manager-backend.herokuapp.com/')
+        axios.get('https://dnd-manager-backend.herokuapp.com')
         .then(res => {
-            console.log('fetched ')
+            console.log(res, res.data)
             setData(res.data)
             setSelected(res.data[0])
         })
@@ -103,7 +103,7 @@ function Entries () {
     
     useEffect(() => {
         getEntries();
-       getAbilities(1);
+        getAbilities(1);
     }, [])
 
     const columns = [
