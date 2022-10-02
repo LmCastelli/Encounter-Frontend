@@ -101,10 +101,10 @@ function Entries () {
         })
     }
     
-    // useEffect(() => {
-    //     getEntries();
-    //     getAbilities(1);
-    // }, [])
+    useEffect(() => {
+        getEntries();
+        getAbilities(1);
+    }, [])
 
     const columns = [
         {
