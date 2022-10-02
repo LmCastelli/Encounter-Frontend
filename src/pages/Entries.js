@@ -1,5 +1,5 @@
 import axios from "axios";
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.min.css'
 import { NavLink } from "react-router-dom";
 import { Table } from "antd";
 import { useEffect, useState} from "react";
