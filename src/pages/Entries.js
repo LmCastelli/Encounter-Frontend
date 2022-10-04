@@ -32,10 +32,10 @@ function Entries () {
             "immunities": "Blinded, Charmed, Invisible",
             "languages_spoken": "All",
             "languages_understood": "All",
-            "name": "Lucas",
+            "name": "TEST",
             "nat_armor_bonus": 10,
             "proficient_skills": "History",
-            "saving_throws": "Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma",
+            "saving_throws": "",
             "size": "Medium",
             "speed": 20,
             "swim_speed": 20,
@@ -44,6 +44,43 @@ function Entries () {
             "true_sight": 30,
             "type": "Humanoid"
         },
+        {
+            "CHA": 2,
+            "CON": 2,
+            "DEX": 2,
+            "INT": 2,
+            "STR": 2,
+            "WIS": 2,
+            "alignment": "Bad",
+            "armor_type": "Nothing",
+            "blind_sight": 0,
+            "burrow_speed": 0,
+            "challenge_rating": 1,
+            "climb_speed": 0,
+            "damage_immune": "Poison",
+            "damage_resistant": "",
+            "damage_vulnerable": "",
+            "dark_vision": 0,
+            "dnd_id": 2,
+            "expert_skills": "Archery",
+            "fly_speed": 0,
+            "hit_points": 0,
+            "immunities": "Charmed, Invisible",
+            "languages_spoken": "",
+            "languages_understood": "All",
+            "name": "TEST TWO",
+            "nat_armor_bonus": 10,
+            "proficient_skills": "History",
+            "saving_throws": "",
+            "size": "Medium",
+            "speed": 20,
+            "swim_speed": 20,
+            "telepathy": 60,
+            "tremor_sense": 0,
+            "true_sight": 30,
+            "type": "Humanoid"
+        },
+            
     ]
 
     const dummyabilities = [
@@ -63,7 +100,7 @@ function Entries () {
 
     const [selected, setSelected] = useState(dummydata[0])
     const [selectedAbilities, setSelectedAbilities] = useState(dummyabilities)
-    const [data, setData] = useState([])
+    const [data, setData] = useState(dummydata)
 
     const abilityModifier = (score) => {
         let mod = Math.floor((score-10) / 2);
@@ -76,7 +113,7 @@ function Entries () {
 
     const handleClick = (record, id) => {
         setSelected(record);
-        setSelectedAbilities(id);
+        getAbilities(id);
     }
 
     const getEntries = () => {
@@ -94,10 +131,13 @@ function Entries () {
     const getAbilities = (id) => {
         axios.get(`https://dnd-manager-backend.herokuapp.com/${id}/abilities`)
         .then(res => {
+            console.log(res.data)
             setSelectedAbilities(res.data)
         })
         .catch(err => {
             console.error(err)
+            setSelectedAbilities({})
+            console.log(selectedAbilities)
         })
     }
     
@@ -140,7 +180,7 @@ function Entries () {
                     </NavLink>
                 </div>
                 <div className="ListContainer">
-                    <Table columns={columns} dataSource={data} rowKey={"dnd_id"} onRow={(record) => ({onClick: () => {setSelected(record)}})} />
+                    <Table columns={columns} dataSource={data} rowKey={"dnd_id"} onRow={(record) => ({onClick: () => {handleClick(record, record.dnd_id)}})} />
                 </div>
             </div>
             <div className="SelectedContainer">
@@ -316,7 +356,7 @@ function Entries () {
                     </svg>
 
                     <h1>Abilities</h1>
-                    {selectedAbilities !== [] ?
+                    {selectedAbilities.length !== 0 ?
                     <div className="AbilityField">
                         {selectedAbilities.map((ability, index) => (
                             <div key={ability.ability_id} className="Abilities">
@@ -326,7 +366,8 @@ function Entries () {
                             
                             
                         ))}
-                    </div>:null}
+                    </div>:
+                    <h4>No Abilities</h4>}
 
                 </div>
                 <div className="Border"></div>
