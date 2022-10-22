@@ -1,0 +1,73 @@
+.EditPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5%;
+    background-image: url('../Dice.jpg');
+    background-size: cover;
+}
+
+.EditTitle {
+    background-image: url('../Grey.jpg');
+    border: solid black 2px;
+    padding: .5%;
+}
+
+.AbilityForm {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../Grey.jpg');
+    border: black solid 2px;
+    padding: 1%;
+}
+
+.AbilityContainer {
+    display: flex;
+    flex-direction: column;
+    background-image: url('../Grey.jpg');
+    border: black solid 2px;
+    margin: 1%;
+    margin-top: 3%;
+    width: 50%;
+}
+
+.Abilities {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.AbilityName {
+    color: black;
+    
+}
+
+.AbilityDescription {
+    color:black;
+    font-weight: 300;
+}
+
+.AbilityButton {
+    align-self: flex-end;
+}
+
+.AbilityTitle {
+    align-self: center;
+}
+
+.AbilityNameEntry {
+    width: 50%;
+}
+
+.AbilityDescriptionEntry {
+    width: 100%;
+}
+
+.AbilityField {
+    height: 100px;
+    width: 100%;
+}

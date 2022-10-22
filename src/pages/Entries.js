@@ -174,6 +174,9 @@ function Entries () {
                     <NavLink to="/" className="Link" >
                         <h1>Home</h1>
                     </NavLink>
+                    <NavLink to="/add" className="Link" >
+                        <h1>Add</h1>
+                    </NavLink>
                     <NavLink to="/" className="Link" >
                         <h1>Encounter</h1>
                     </NavLink>
@@ -185,7 +188,10 @@ function Entries () {
             <div className="SelectedContainer">
                 <div className="Border"></div>
                 <div className="Info">
-                    <h1 className="Title">{selected.name}</h1>
+                    <div className="NameAndEdit">
+                        <h1 className="Title">{selected.name}</h1>
+                        <NavLink className="Edit" to={`/edit/${selected.dnd_id}`} ><button>EDIT</button> </NavLink>
+                    </div>
                     <p className="Description">{selected.size} {selected.type.toLowerCase()}, {selected.alignment}</p>
                     <svg height="5" width="100%" className="DividingLine">
                         <polyline points="0,0 400, 2.5 0,5"></polyline>
@@ -357,7 +363,7 @@ function Entries () {
                     <h1>Abilities</h1>
                     {selectedAbilities.length !== 0 ?
                     <div className="AbilityField">
-                        {selectedAbilities.map((ability, index) => (
+                        {selectedAbilities.map((ability) => (
                             <div key={ability.ability_id} className="Abilities">
                                 <h4>{ability.ability_name}:</h4>
                                 <p>{ability.ability_description}</p>

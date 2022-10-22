@@ -16,8 +16,10 @@
 .NavBar {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     background-color: white;
     margin-bottom: 3%;
+    width: 50%;
 }
 
 .ListContainer {
@@ -41,6 +43,12 @@
     background-image: url(https://tetra-cube.com/dnd/dndimages/statblockparch.jpg);
     padding: 2%;
     font-family: 'Libre Baskerville';
+}
+
+.NameAndEdit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .Description {
@@ -73,6 +81,12 @@
 .Title {
     margin-top:1%;
     margin-bottom: 1%;
+    margin-right: 25%;
+}
+
+.Edit {
+    color: #7A200D;
+    font-size: large;
 }
 
 .Abilities {

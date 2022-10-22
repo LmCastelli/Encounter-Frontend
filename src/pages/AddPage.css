@@ -1,18 +1,120 @@
 .AddPageContainer {
-    border: solid black 2px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-bottom: 5%;
+    background-image: url('../Dice.jpg');
+    background-size: cover;
+}
+
+.NavBar {
+    background-image: url('../Grey.jpg');
+    border: black solid 2px;
+    margin: 1%;
+}
+
+.Link {
+    padding: 1%;
+}
+
+.Form {
+    width:80%;
+    display: flex;
+    flex-direction: column;
 }
 
 .Required {
-    width: 80%;
-    border: solid red 2px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-image: url('../Grey.jpg');
+    border: black solid 2px;
+}
+
+.GeneralDiv {
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1%;
+}
+
+.StatsDiv {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 1%
 }
 
 .Extra {
-    width: 80%;
-    border: solid green 2px;
+    width: 100%;
+    background-image: url('../Grey.jpg');
+    border: black solid 2px;
+    padding: 1%;
 }
+
+.AddTitle {
+    align-self: center;
+    text-align: center;
+    margin:0;
+    padding:0;
+}
+
+.SubTitle {
+    align-self: flex-start;
+}
+
+.TinyInput {
+    width: 25%;
+}
+
+.General {
+    margin-left: 5%;
+    padding-right: 1%;
+}
+
+.STAT {
+    margin-left: 10%;
+}
+
+.TinySTAT {
+    width: 10%;
+}
+
+.ExtraAttributes {
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+.TinyField {
+    width:4%;
+}
+
+.MedField {
+    width: 40%;
+    margin-right: 40%;
+}
+
+.BigField {
+    width:60%;
+    margin-right: 25%;
+}
+
+label {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+}
+
+.GeneralDiv input {
+    margin-left: 2%;
+}
+
+.Extra input {
+    margin-left: 1%;
+}
+
