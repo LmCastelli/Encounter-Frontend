@@ -17,7 +17,7 @@ function EditPage()  {
     useEffect(() => {
         getEntry();
         getAbilities(id);
-    }, [])
+    })
 
     const getEntry = () => {
         axios.get(`https://dnd-manager-backend.herokuapp.com/${id}/`)
@@ -80,8 +80,8 @@ function EditPage()  {
             setAbilityError(false)
             axios.post("https://dnd-manager-backend.herokuapp.com/abilities/", newAbility)
                 .then(res => {
-                    console.log("working")
                     console.log(res)
+                    window.location.reload();
                 })
                 .catch(err => {
                     console.error(err)
