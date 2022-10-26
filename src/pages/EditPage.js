@@ -74,8 +74,8 @@ function EditPage()  {
     }
 
     const handleAbilitySubmit = (e) => {
+        e.preventDefault()
         if(newAbility.ability_name === '' || newAbility.ability_description === '') {
-            e.preventDefault()
             setAbilityError(true)
         } else {
             setAbilityError(false)

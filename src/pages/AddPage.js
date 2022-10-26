@@ -327,7 +327,7 @@ function AddPage() {
                     <label>Vulnerabilities:
                     <input 
                         type="text"
-                        name="damage_vulnerabilities"
+                        name="damage_vulnerable"
                         value={entry.damage_vulnerable}
                         onChange={handleChange}
                         className="BigField"
