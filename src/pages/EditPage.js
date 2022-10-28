@@ -79,11 +79,13 @@ function EditPage()  {
             setAbilityError(true)
         } else {
             setAbilityError(false)
-            console.log(newAbility)
+            console.log("Here is the new ability", newAbility)
             axios.post("https://dnd-manager-backend.herokuapp.com/abilities/", newAbility)
                 .then(res => {
-                    console.log(res)
+                    console.log(res.data,"here is res.data")
                     setNewAbility({user_id:id, ability_name:'', ability_description:''})
+                    navigate(`/edit/${id}`)
+                    
                 })
                 .catch(err => {
                     console.error(err)
@@ -353,7 +355,7 @@ function EditPage()  {
                     <label>Vulnerabilities:
                     <input 
                         type="text"
-                        name="damage_vulnerabilities"
+                        name="damage_vulnerable"
                         value={entry.damage_vulnerable}
                         onChange={handleChange}
                         className="BigField"

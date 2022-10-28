@@ -67,7 +67,7 @@ function AddPage() {
             setError(false)
             axios.post('https://dnd-manager-backend.herokuapp.com', entry)
                 .then(res => {
-                    navigate('/')
+                    navigate('/view')
                 })
                 .catch(err => {
                     console.log(err)
