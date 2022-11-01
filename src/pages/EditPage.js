@@ -84,7 +84,7 @@ function EditPage()  {
                 .then(res => {
                     console.log(res.data,"here is res.data")
                     setNewAbility({user_id:id, ability_name:'', ability_description:''})
-                    navigate(`/edit/${id}`)
+                    getAbilities(id);
                     
                 })
                 .catch(err => {
@@ -97,6 +97,7 @@ function EditPage()  {
         axios.delete(`https://dnd-manager-backend.herokuapp.com/abilities/${id}`)
             .then(res => {
                 console.log(res)
+                getAbilities(id);
             })
             .catch(err => {
                 console.error(err)
