@@ -6,7 +6,7 @@ import { useEffect, useState} from "react";
 import "./Entries.css"
 
 function Entries () {
-
+    document.body.style.backgroundColor = "#000000";
     const dummydata = [
         {
             "CHA": 20,
@@ -367,9 +367,7 @@ function Entries () {
                             <div key={ability.ability_id} className="Abilities">
                                 <h4>{ability.ability_name}:</h4>
                                 <p>{ability.ability_description}</p>
-                            </div>
-                            
-                            
+                            </div> 
                         ))}
                     </div>:
                     <h4>No Abilities</h4>}

@@ -12,7 +12,8 @@
 .EditTitle {
     background-image: url('../Grey.jpg');
     border: solid black 2px;
-    padding: .5%;
+    padding-right: .5%;
+    padding-left: .5%;
 }
 
 .AbilityForm {

@@ -1,9 +1,7 @@
 .EntriesContainer {
-    border: solid black 2px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
 }
 
 .AllEntriesContainer {
@@ -18,13 +16,16 @@
     flex-direction: row;
     justify-content: space-around;
     background-color: white;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
     width: 50%;
 }
 
 .ListContainer {
     margin-right: 15%;
     width: 100%;
+    background-color: white;
+    margin-bottom: 1%;
+    padding: 1%;
 }
 
 .SelectedContainer {
